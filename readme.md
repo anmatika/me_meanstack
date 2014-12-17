@@ -6,6 +6,7 @@
 * cd /client && bower install 
 * cd /client grunt build --force
 * cd /server && npm install
+* cd /client && grunt build --force (for at least scss -> css sake)
 
 
 # Quick start | run server (/app)
