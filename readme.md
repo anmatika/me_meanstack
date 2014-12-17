@@ -31,3 +31,8 @@
 * cd /server && npm test
 * cd client/node_modules/protractor/bin && ./webdriver-manager start
 * cd client/node_modules/protractor && protractor conf.js
+
+#Git
+* git clone https://github.com/anmatika/me_meanstack.git
+* git branch shop
+* git checkout shop
