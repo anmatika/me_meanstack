@@ -1,0 +1,112 @@
+//colors
+$mercury: #e5e5e5;
+$color_tapa_approx: #777;
+$black_80: rgba(0, 0, 0, 0.8);
+$color_suva_gray_approx: #888888;
+
+//fonts
+$font_0: Josefin Slab;
+$font_1: Helvetica Neue;
+$font_2: Helvetica;
+$font_3: Arial;
+$font_4: sans-serif;
+$font_5: Roboto;
+$font_6: Open Sans;
+
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 13px;
+}
+.header {
+  padding-left: 15px;
+  padding-right: 15px;
+  border-bottom: 1px solid $mercury;
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+  }
+}
+.marketing {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 40px 0;
+  p + h4 {
+    margin-top: 28px;
+  }
+}
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 19px;
+  color: $color_tapa_approx;
+  border-top: 1px solid $mercury;
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid $mercury;
+  .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .header {
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 30px;
+  }
+  .marketing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+#brand_top {
+  text-align: center;
+  font-size: 1em;
+  font-weight: 500;
+  //Instead of the line below you could use @includetext-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  text-shadow: 1px 1px 2px $black_80;
+  font-family: $font_0, $font_1, $font_2, $font_3, $font_4;
+}
+.box {
+  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 7px 7px 5px $color_suva_gray_approx;
+  font-family: $font_5, $font_6, $font_1, $font_2, $font_3, $font_4;
+  background: url('../images/contemporary_china.png');
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+strong {
+  font-size: 0.9em;
+}
+
+.brand_logo {
+
+  // float: left;
+  img {
+    opacity: 0.8;
+  }
+}
+
+ul li {
+    
+      font-size: 0.8em;
+  }
+
