@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name karvinenApp.controller:HeaderCtrl
+ * @name meshopApp.controller:HeaderCtrl
  * @description
  * # HeaderCtrl
- * Controller of the karvinenApp
+ * Controller of the meshopApp
  */
-angular.module('karvinenApp')
+angular.module('meshopApp')
   .controller('HeaderCtrl', function ($scope, $location) {
     $scope.isActive = function(viewLocation){
     	return viewLocation === $location.path();

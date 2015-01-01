@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: VieraskirjaCtrl', function () {
+describe('Controller: ContactCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('karvinenApp'));
+  beforeEach(module('meshopApp'));
 
-  var VieraskirjaCtrl,
+  var ContactCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    VieraskirjaCtrl = $controller('VieraskirjaCtrl', {
+    ContactCtrl = $controller('ContactCtrl', {
       $scope: scope
     });
   }));

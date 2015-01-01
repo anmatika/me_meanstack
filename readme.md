@@ -36,3 +36,5 @@
 * git clone https://github.com/anmatika/me_meanstack.git
 * git branch shop
 * git checkout shop
+* git commit -a
+* git push origin shop

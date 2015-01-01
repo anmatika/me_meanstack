@@ -1,5 +1,5 @@
 {
-  "name": "karvinen",
+  "name": "meshop",
   "version": "0.0.0-3",
   "dependencies": {},
   "devDependencies": {
@@ -40,5 +40,5 @@
     "test": "grunt test",
     "start": "node app"
   },
-  "subdomain": "karvinen"
+  "subdomain": "meshop"
 }

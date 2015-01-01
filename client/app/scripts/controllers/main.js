@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name karvinenApp.controller:MainCtrl
+ * @name meshopApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the karvinenApp
+ * Controller of the meshopApp
  */
-angular.module('karvinenApp')
+angular.module('meshopApp')
   .controller('MainCtrl', function ($scope) {
 
   });
