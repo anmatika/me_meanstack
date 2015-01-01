@@ -11,6 +11,7 @@ var database = require('./database');
 router.get('/galleria', galleria.getImages); 
 router.post('/createPost', database.createPost); 
 router.get('/getPosts', database.getPosts); 
+router.get('/getProducts', database.getProducts); 
 
 // Expose the module
 module.exports = router;

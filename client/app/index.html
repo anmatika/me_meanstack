@@ -16,9 +16,6 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/shop-homepage.css"/>
     <link rel="stylesheet" href="styles/nav.css"/>
-    <!-- <link rel="stylesheet" href="styles/ryhmat.css"/> -->
-    <!-- <link rel="stylesheet" href="styles/ruokalista.css"/> -->
-    <!-- <link rel="stylesheet" href="styles/kuvagalleria.css"/> -->
     <!-- endbuild -->
     <link href='http://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
       <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
@@ -64,13 +61,15 @@
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        
+        <script src="scripts/angular-locale_fi.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/directives/directives.js"></script>
+        <script src="scripts/services/productSvc.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/header.js"></script>
         <script src="scripts/controllers/contact.js"></script>
         <script src="scripts/controllers/cart.js"></script>
+        <script src="scripts/filters/currencyeuro.js"></script>
         <!-- endbuild -->
         
         <!-- hides mobile menu when clicked  -->
