@@ -9,9 +9,12 @@
  */
 angular.module('meshopApp')
   .controller('CartCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+    
+    $scope.checkout = function() {
+           console.log('checkout func');
+           $scope.summary = ngCart.toObject();
+           
+         // Post your cart to your resource
+         //$http.post('cart/', ngCart.toObject());
+    }
   });
