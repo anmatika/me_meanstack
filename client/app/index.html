@@ -15,6 +15,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/shop-homepage.css"/>
+    <link rel="stylesheet" href="styles/nav.css"/>
     <!-- <link rel="stylesheet" href="styles/ryhmat.css"/> -->
     <!-- <link rel="stylesheet" href="styles/ruokalista.css"/> -->
     <!-- <link rel="stylesheet" href="styles/kuvagalleria.css"/> -->
@@ -26,6 +27,8 @@
         <div ng-include="'views/nav.html'"></div>
         <!-- /.container -->
         <div class="container">
+        <!-- <ngcart-cart id="{{ item.id }}" name="{{ item.name }}" price="{{ item.price }}" data="item"></ngcart-cart> -->
+
           <!-- Page Content -->
           <div ng-view=""></div>
 
@@ -34,7 +37,7 @@
           <footer>
             <div class="row">
               <div class="col-lg-12">
-                <p>Copyright &copy; Your Website 2014</p>
+                <p>Copyright &copy; amatika 2015</p>
               </div>
             </div>
           </footer>
@@ -67,6 +70,7 @@
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/header.js"></script>
         <script src="scripts/controllers/contact.js"></script>
+        <script src="scripts/controllers/cart.js"></script>
         <!-- endbuild -->
         
         <!-- hides mobile menu when clicked  -->
