@@ -1,4 +1,3 @@
-mongoConn = "mongodb://localhost/karvinenry-dev";
 
 var express = require('express');
 var path = require('path');
@@ -13,6 +12,8 @@ var configDb = require('./config/db');
 var passport = require('passport');
 var session      = require('express-session');
 var flash    = require('connect-flash');
+app.set('view engine', 'ejs'); // set up ejs for templating NOT NEEDED AT THE MOMENT
+require('./config/passport')(passport); // pass passport for configuration
 mongoose.connect(configDb.url);
 
 // uncomment after placing your favicon in /public
