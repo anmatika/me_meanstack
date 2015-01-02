@@ -13,8 +13,8 @@ angular.module('meshopApp')
       function getProducts() {
 	   	
 	   	var deferred = $q.defer();
-
-	   	$http.get('/routes/getProducts')
+		
+	   	$http.get('/getProducts')
 	   		.success(function(data){
 	   			
 	   			deferred.resolve(data);

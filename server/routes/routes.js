@@ -1,17 +1,29 @@
-// Include Express
-var express = require('express');
+module.exports = function(router, passport) {
+	
+	var database = require('./database');
 
-// Initialize the Router
-var router = express.Router();
+	// Setup a route /galleria/images
+	// router.get('/galleria', galleria.getImages);
+	// router.post('/createPost', database.createPost);
+	// router.get('/getPosts', database.getPosts);
+	router.get('/getProducts', database.getProducts);
 
-var galleria = require('./galleria');
-var database = require('./database');
+	// process the signup form
+	router.post('/signup', passport.authenticate('local-signup', {
+		successRedirect: '/profile', // redirect to the secure profile section
+		failureRedirect: '/signup', // redirect back to the signup page if there is an error
+		failureFlash: true // allow flash messages
+	}));
 
-// Setup a route /galleria/images
-router.get('/galleria', galleria.getImages); 
-router.post('/createPost', database.createPost); 
-router.get('/getPosts', database.getPosts); 
-router.get('/getProducts', database.getProducts); 
+	// // process the login form
+	router.post('/login', passport.authenticate('local-login', {
+		successRedirect: '/profile', // redirect to the secure profile section
+		failureRedirect: '/login', // redirect back to the signup page if there is an error
+		failureFlash: true // allow flash messages
+	}));
 
-// Expose the module
-module.exports = router;
+	router.get('/ping', function (req, res){
+		res.send('pong');
+	})
+}
+
