@@ -8,7 +8,7 @@
  * Controller of the meshopApp
  */
 angular.module('meshopApp')
-	.controller('LoginCtrl', function($scope, $http, loginSvc) {
+	.controller('LoginCtrl', function($scope, $http, $rootScope, loginSvc) {
 		$scope.send = function() {
 			loginSvc.send($scope.email, $scope.password)
 				.then(function(data) {
@@ -19,6 +19,7 @@ angular.module('meshopApp')
 							console.log('status: ' + status);
 							$scope.successmessage = "Login succeeded";
 							$scope.errormessage = "";
+							$rootScope.$broadcast('loggedIn', data.user.local.email);	
 
 						} else {
 							$scope.errormessage = data.message;
@@ -50,5 +51,6 @@ angular.module('meshopApp')
 			 function(reason){
 			 	console.log(reason);	
 			 });
+			 $rootScope.$broadcast('loggedIn', '');	
 		};
 	});

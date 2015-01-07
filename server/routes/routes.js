@@ -65,6 +65,8 @@ module.exports = function(router, passport) {
 	                return next(err);
 	            }
 	            res.cookie('user', JSON.stringify({'id': user.id }), { httpOnly: false } );
+	            // res.cookie('email', JSON.stringify({'email': req.user.local.email }), { httpOnly: false } );
+	            res.cookie('email', req.user.local.email, { httpOnly: false } );
 	            return res.send({ success: true, user: req.user });
 	        });
 		})(req, res, next);
@@ -80,8 +82,15 @@ module.exports = function(router, passport) {
 	  res.send(req.isAuthenticated() ? req.user : '0');
 	});
 
+	// get user from session
+	router.get('/getUser', function(req, res) {
+	  res.send(req.isAuthenticated() ? req.user : '0');
+	});
+
 	router.get('/logout', function(req, res) {
-	   req.logOut(); res.send(200);
+	   req.logOut(); 
+	   res.clearCookie('email');
+	   res.send(200);
 	});
 
 
@@ -89,33 +98,7 @@ module.exports = function(router, passport) {
 		res.send('pong');
 	});
 
-	//** Below HTML (ejs) templates ***
-
-	// =====================================
-	// SIGNUP ==============================
-	// =====================================
-	// show the signup form
-	router.get('/signup', function(req, res) {
-
-		// render the page and pass in any flash data if it exists
-		res.render('signup.ejs', {
-			message: req.flash('signupMessage')
-		});
-	});
-
-	// =====================================
-	// LOGIN ===============================
-	// =====================================
-	// show the login form
-	router.get('/login', function(req, res) {
-
-		// render the page and pass in any flash data if it exists
-		res.render('login.ejs', {
-			message: req.flash('loginMessage')
-		});
-	});
-
-
+	// EJS-template:
 	// =====================================
 	// PROFILE SECTION =====================
 	// =====================================
@@ -125,14 +108,6 @@ module.exports = function(router, passport) {
 		res.render('profile.ejs', {
 			user: req.user // get the user out of session and pass to template
 		});
-	});
-
-	// =====================================
-	// LOGOUT ==============================
-	// =====================================
-	router.get('/logout', function(req, res) {
-		req.logout();
-		res.redirect('/');
 	});
 
 	// route middleware to make sure a user is logged in
