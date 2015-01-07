@@ -9,8 +9,8 @@
  */
 angular.module('meshopApp')
 	.controller('LoginCtrl', function($scope, $http, $rootScope, loginSvc) {
-		$scope.send = function() {
-			loginSvc.send($scope.email, $scope.password)
+		$scope.login = function() {
+			loginSvc.login($scope.email, $scope.password)
 				.then(function(data) {
 						if (data.success) {
 							console.log('data.user._id: ' + data.user._id);
@@ -29,12 +29,12 @@ angular.module('meshopApp')
 						// when the response is available	
 					},
 					function(reason) {
-						console.log(reason);
+						// console.log(reason);
 					});
 		};
 
-		$scope.isLoggedIn = function() {
-			loginSvc.isLoggedIn()
+		$scope.getUser = function() {
+			loginSvc.getUser()
 				.then(function(data) {
 						console.log(data);
 					},

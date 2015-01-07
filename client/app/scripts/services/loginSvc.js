@@ -12,7 +12,7 @@ angular.module('meshopApp')
 
     return {
 
-      send: function(email, password) {
+      login: function(email, password) {
         
         var deferred = $q.defer();
         console.log(password);
@@ -36,10 +36,10 @@ angular.module('meshopApp')
 
       },
 
-      isLoggedIn: function() {
+      getUser: function() {
         var deferred = $q.defer();
         
-        $http.get('/isloggedin').
+        $http.get('/getuser').
         success(function(data, status, headers, config) {
           deferred.resolve(data);
           // this callback will be called asynchronously

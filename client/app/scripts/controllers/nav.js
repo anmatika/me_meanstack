@@ -8,22 +8,28 @@
  * Controller of the meshopApp
  */
 angular.module('meshopApp')
-  .controller('NavCtrl', function ($scope, $location, $cookies) {
-    
-    function setUserName(){
-    	console.log('cookie.email: ' + $cookies.email);
-    	$scope.userName = $cookies.email;
-    }
+	.controller('NavCtrl', function($scope, $location, $cookies, loginSvc) {
 
-    $scope.isActive = function(viewLocation){
-    	return viewLocation === $location.path();
-    };
+		var setUserName = function() {
+			
+			loginSvc.getUser()
+				.then(function(data) {
+						$scope.username = data.local.email;
+					},
+					function(reason) {
+						console.log(reason);
+					});
+		}
 
-    $scope.$on('loggedIn', function(event, args){
-    	console.log('loggedIn hit: ' + args);
-    	$scope.username = args;	
-    })
+		$scope.isActive = function(viewLocation) {
+			return viewLocation === $location.path();
+		};
 
-    setUserName();
+		$scope.$on('loggedIn', function(event, args) {
+			console.log('loggedIn hit: ' + args);
+			$scope.username = args;
+		})
 
-  });
+		setUserName();
+
+	});

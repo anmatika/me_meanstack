@@ -27,9 +27,13 @@ module.exports = function(config) {
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/ngcart/dist/ngCart.js',
       'app/scripts/**/*.js',
-      'test/mock/**/*.js',
-      'test/unit/**/*.js'
+      // 'app/scripts/app.js',
+      // 'app/scripts/controllers/contact.js',
+      // 'test/spec/controllers/contact.js'     
+      'test/unit/**/*.js',
+      'test/spec/**/*.js'
     ],
 
     // list of files / patterns to exclude

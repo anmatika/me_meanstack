@@ -72,16 +72,6 @@ module.exports = function(router, passport) {
 		})(req, res, next);
 	});
 
-	// route to log in
-	// router.post('/login', passport.authenticate('local-login'), function(req, res) {
-	//   	res.send(req.user);
-	// });
-
-	// route to test if the user is logged in or not
-	router.get('/isloggedin', function(req, res) {
-	  res.send(req.isAuthenticated() ? req.user : '0');
-	});
-
 	// get user from session
 	router.get('/getUser', function(req, res) {
 	  res.send(req.isAuthenticated() ? req.user : '0');
