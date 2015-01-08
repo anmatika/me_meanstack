@@ -11,17 +11,17 @@ describe('homepage', function() {
 
   it('should have title', function() {
     
-    expect(browser.getTitle()).toEqual('Karvinen Ry.');
+    expect(browser.getTitle()).toEqual("The amatika's");
   
   });
 
-  it('logo click routes back to home', function() {
+ //  it('logo click routes back to home', function() {
 
-	browser.get('http://localhost:3000/#/ryhmat');
-	var logo = element(by.id('navbar_logo'));
-	logo.click();
-	expect(browser.getLocationAbsUrl()).toMatch("/");
+	// browser.get('http://localhost:3000/#/ryhmat');
+	// var logo = element(by.id('navbar_logo'));
+	// logo.click();
+	// expect(browser.getLocationAbsUrl()).toMatch("/");
 
-  });
+ //  });
 
 });

@@ -8,7 +8,8 @@
  * Controller of the meshopApp
  */
 angular.module('meshopApp')
-	.controller('LoginCtrl', function($scope, $http, $rootScope, loginSvc) {
+	.controller('LoginCtrl', function($scope, $rootScope, $location, loginSvc) {
+
 		$scope.login = function() {
 			loginSvc.login($scope.email, $scope.password)
 				.then(function(data) {
@@ -19,8 +20,8 @@ angular.module('meshopApp')
 							console.log('status: ' + status);
 							$scope.successmessage = "Login succeeded";
 							$scope.errormessage = "";
-							$rootScope.$broadcast('loggedIn', data.user.local.email);	
-
+							$rootScope.$broadcast('loggedIn', data.user.local.email);
+							$location.path('/#')
 						} else {
 							$scope.errormessage = data.message;
 							$scope.successmessage = "";
@@ -39,18 +40,7 @@ angular.module('meshopApp')
 						console.log(data);
 					},
 					function(reason) {
-						console.log(reason);	
+						console.log(reason);
 					});
-		};
-
-		$scope.logout = function() {
-			loginSvc.logout()
-			 .then(function(data){
-			 	console.log(data);			
-			 },
-			 function(reason){
-			 	console.log(reason);	
-			 });
-			 $rootScope.$broadcast('loggedIn', '');	
 		};
 	});

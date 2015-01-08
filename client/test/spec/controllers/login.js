@@ -9,7 +9,7 @@ describe('Controller: LoginCtrl', function() {
     controller,
     rootScope,
     q,
-    httpBackend,
+    location,
     loginService,
     defer;
 
@@ -18,7 +18,7 @@ describe('Controller: LoginCtrl', function() {
     controller = $injector.get('$controller');
     rootScope = $injector.get('$rootScope');
     q = $injector.get('$q');
-    httpBackend = $injector.get('$httpBackend');
+    location = $injector.get('$location');
 
     scope = rootScope.$new();
 
@@ -47,15 +47,14 @@ describe('Controller: LoginCtrl', function() {
   beforeEach(function(){
     var ctrl = controller('LoginCtrl', {
       $scope: scope,
-      $http: httpBackend,
       $rootScope: rootScope,
+      $location: location,
       loginSvc: loginService
     });
 
     spyOn(loginService, 'getUser').and.callThrough();
     spyOn(loginService, 'login').and.callThrough();
-    spyOn(loginService, 'logout').and.callThrough();
-    spyOn(rootScope, '$broadcast');
+    // spyOn(rootScope, '$broadcast');
   })
 
 
@@ -91,7 +90,7 @@ describe('Controller: LoginCtrl', function() {
     expect(loginService.login).toHaveBeenCalledWith(email, password);
     expect(scope.successmessage).toBe('Login succeeded');
     expect(scope.errormessage).toBe('');
-    expect(rootScope.$broadcast).toHaveBeenCalledWith('loggedIn', data.user.local.email);
+    // expect(rootScope.$broadcast).toHaveBeenCalledWith('loggedIn', data.user.local.email);
   });
 
   it('login should call loginService.login and fail message show', function() {
@@ -115,10 +114,5 @@ describe('Controller: LoginCtrl', function() {
     expect(scope.successmessage).toBe('');
   });
 
-  it('logout should call loginService.logout', function() {
-
-    scope.logout();
-    expect(loginService.logout).toHaveBeenCalled();
-    expect(rootScope.$broadcast).toHaveBeenCalledWith('loggedIn', '');
-  });
+  
 });

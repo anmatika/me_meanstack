@@ -8,13 +8,26 @@
  * Controller of the meshopApp
  */
 angular.module('meshopApp')
-	.controller('NavCtrl', function($scope, $location, $cookies, loginSvc) {
+	.controller('NavCtrl', function($scope, $location, $cookies, $rootScope, loginSvc) {
+
+		$scope.logout = function() {
+			loginSvc.logout()
+				.then(function(data) {
+						console.log(data);
+					},
+					function(reason) {
+						console.log(reason);
+					});
+			$scope.username = '';
+		};
 
 		var setUserName = function() {
-			
+
 			loginSvc.getUser()
 				.then(function(data) {
-						$scope.username = data.local.email;
+						if (data.local) {
+							$scope.username = data.local.email;
+						}
 					},
 					function(reason) {
 						console.log(reason);

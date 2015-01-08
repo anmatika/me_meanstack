@@ -23,19 +23,26 @@
         <li>
           <a ng-href="#/contact">Contact</a>
         </li>
-        <li>
+        <li id="signup" ng-show="!username || username.length == 0">
           <a ng-href="#/signup">Signup</a>
         </li>
-        <li>
+        <li id="login" ng-show="!username || username.length == 0">
           <a ng-href="#/login">Login</a>
         </li>
+
       </ul>
       <a ng-href="#/cart">
         <div id="cart_summary" class="pull-right col-sm-2">
           <ngcart-summary></ngcart-summary>
         </div>
       </a>
-      <div class="pull-right">{{ username }}</div>
+      <div class="row">
+        <div ng-show="username.length > 0">
+          <a class="pull-right" id="logout" ng-click="logout()">Logout</a>
+          <span class="pull-right">&nbsp;|&nbsp;</span>
+          <div class="pull-right">{{ username }}</div>
+        </div>
+      </div>
     </div>
     <!-- /.navbar-collapse -->
   </div>

@@ -81,14 +81,14 @@ module.exports = function (grunt) {
                     browser: "chrome"
                 }
             }
-      },
-      firefox: {
-          options: {
-              args: {
-                  browser: "firefox"
-              }
-          }
-        }
+      }
+      // firefox: {
+      //     options: {
+      //         args: {
+      //             browser: "firefox"
+      //         }
+      //     }
+      //   }
     },
     // The actual grunt server settings
     connect: {
@@ -451,7 +451,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('unit', [
-    'clean:server',
+    // 'clean:server',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -459,7 +459,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('e2e', [
-    'clean:server',
+    // 'clean:server',
     'connect:test', 
     'protractor'
   ]);

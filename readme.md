@@ -18,14 +18,15 @@
 # Run server at production mode (/server/dist)
 * cd /server && npm start
 
+# When SCSS work
+* cd /client && grunt watch
+
 # Unit test
 * cd /client && grunt unit
 
 # E2e test
+* cd /server && npm test
 * cd /client && grunt e2e
-
-# Deploy to Nodejitsu
-* cd / && jitsu deploy
 
 # Protractor (manual e2e test) 
 * cd /server && npm test
