@@ -15,7 +15,7 @@ angular.module('meshopApp')
            // $scope.summary = ngCart.toObject();
            
            $scope.summary = ngCart.getItems();
-         // Post your cart to your resource
-         //$http.post('cart/', ngCart.toObject());
+           // Post your cart to your resource
+           //$http.post('cart/', ngCart.toObject());
     }
   }]);

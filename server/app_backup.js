@@ -14,7 +14,6 @@ var session      = require('express-session');
 var flash    = require('connect-flash');
 var fs = require('fs');
 var https = require('https');
-var http = require('http');
 var key = fs.readFileSync('/usr/local/etc/ssl/key.pem');
 var cert = fs.readFileSync('/usr/local/etc/ssl/cert.pem');
 var https_options = {
@@ -23,10 +22,9 @@ var https_options = {
 };
 var PORT = 8000;
 var HOST = 'localhost';
-// var https_server = require('https').createServer(https_options, app);
-var api = express();
+var https_server = require('https').createServer(https_options, app);
 
-app.set('view engine', 'ejs'); // set up ejs
+app.set('view engine', 'ejs'); // set up ejs for templating NOT NEEDED AT THE MOMENT
 require('./config/passport')(passport); // pass passport for configuration
 mongoose.connect(configDb.url);
 
@@ -42,7 +40,6 @@ app.use(session({ secret: 'fhappylfjkl3jklovec312yesdvdgood' })); // session sec
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-
 
 /**
  * Development Settings
@@ -85,23 +82,7 @@ if (app.get('env') === 'production') {
     });
 }
 
-//HTTPS Api Server
-https.createServer(https_options, app).listen(8000, function(){
-  console.log("Api server listening on port " + app.get('ssl_port'));
-});
-
-
-function ensureSecure(req, res, next){
-  if(req.secure){
-    // OK, continue
-    return next();
-  };
-  res.redirect('https://'+ req.host +':8000' + req.url); // handle port numbers if you need non defaults
-};
-
-app.all('*', ensureSecure); // at top of routing calls
-
-// https_server.listen(PORT);
+https_server.listen(PORT);
 
 /**
 * Routes

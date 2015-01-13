@@ -1,3 +1,11 @@
+<style type="text/css">
+    .navbar-inverse {
+  background-color: #107BED;
+}
+.navbar-inverse a {
+  color: #fff !important;
+}
+</style>
 <!-- Navigation -->
 <nav ng-controller="NavCtrl" id="navigation" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -9,11 +17,11 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#/">amatika's</a>
+      <a class="navbar-brand" href="/">amatika's</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+<!--       <ul class="nav navbar-nav">
         <li>
           <a href="#/">About</a>
         </li>
@@ -24,28 +32,25 @@
           <a ng-href="#/contact">Contact</a>
         </li>
         <li id="signup" ng-show="!username || username.length == 0">
-          <!-- <a ng-href="#/signup">Signup</a> -->
           <a href="/signup">Sign up</a>
         </li>
         <li id="login" ng-show="!username || username.length == 0">
-          <!-- <a ng-href="#/login">Login</a> -->
           <a href="/login">Login</a>
         </li>
 
       </ul>
-      <a ng-href="#/cart">
+ -->      <!-- <a ng-href="#/cart">
         <div id="cart_summary" class="pull-right col-sm-2">
           <ngcart-summary></ngcart-summary>
         </div>
       </a>
       <div class="row">
         <div ng-show="username.length > 0">
-          <!-- <a class="pull-right" id="logout" ng-click="logout()">Logout</a> -->
-          <a class="pull-right" id="logout" href="/logout">Logout</a>
+          <a class="pull-right" id="logout" ng-click="logout()">Logout</a>
           <span class="pull-right">&nbsp;|&nbsp;</span>
           <div class="pull-right">{{ username }}</div>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- /.navbar-collapse -->
   </div>
