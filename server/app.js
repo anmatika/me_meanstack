@@ -99,7 +99,7 @@ function ensureSecure(req, res, next){
   res.redirect('https://'+ req.host +':8000' + req.url); // handle port numbers if you need non defaults
 };
 
-app.all('*', ensureSecure); // at top of routing calls
+app.all('/secure/*', ensureSecure); // at top of routing calls
 
 // https_server.listen(PORT);
 

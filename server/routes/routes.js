@@ -107,15 +107,36 @@ module.exports = function(router, passport) {
 		});
 	});
 	
-	
-	router.get('/login', function(req, res) {
+	router.get('/secure/login', function(req, res) {
 		// render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') }); 	
     });
 
-    router.get('/signup', function(req, res) {
+    router.get('/secure/signup', function(req, res) {
 		 // render the page and pass in any flash data if it exists
         res.render('signup.ejs', { message: req.flash('signupMessage') });
+    });
+
+    router.get('/secure/orderconfirmation', function(req, res) {
+		 // render the page and pass in any flash data if it exists
+		// var items = req.flash('orderItems');
+		var items = req.session.checkedoutItems;
+        res.render('orderConfirmation.ejs', { items: items });
+    });
+
+
+    router.post('/checkout', function (req, res){
+
+    	var items = req.body;
+    	req.session.checkedoutItems = items;
+    	console.log(JSON.stringify(req.body));
+    	// for (var i in items) {
+    	// 	console.log('orderItems: ' + JSON.stringify(items[i]._name));
+
+    	// }
+    	// req.flash('orderItems', items);
+    	// res.redirect('/secure/orderconfirmation');
+    	res.send(items, 200);
     });
 
 	// route middleware to make sure a user is logged in

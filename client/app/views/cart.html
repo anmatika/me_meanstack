@@ -2,7 +2,14 @@
 	<ngcart-cart id="{{ item.id }}" name="{{ item.name }}" price="{{ item.price }}" data="item"></ngcart-cart>
 <div class="row">
     <div class="col-sm-12">
-        <input ng-click="checkout()" class="pull-right btn btn-md btn-primary" type="button" value="Checkout">
+        <form action="/checkout" method="post">        	
+        	<!-- <div ng-repeat="item in items">
+				<input type="text" ng-model="item.name" />
+        	</div> 
+ -->
+        	<!-- <input class="pull-right btn btn-md btn-primary" type="submit" value="Checkout"> -->
+        	<input class="pull-right btn btn-md btn-primary" type="button" ng-click="checkout()" value="Checkout">
+        </form>
     </div>
 </div>
 
