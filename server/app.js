@@ -17,6 +17,7 @@ var https = require('https');
 var http = require('http');
 var key = fs.readFileSync('/usr/local/etc/ssl/key.pem');
 var cert = fs.readFileSync('/usr/local/etc/ssl/cert.pem');
+
 var https_options = {
     key: key,
     cert: cert
@@ -42,6 +43,7 @@ app.use(session({ secret: 'fhappylfjkl3jklovec312yesdvdgood' })); // session sec
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+
 
 
 /**
