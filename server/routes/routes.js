@@ -3,7 +3,7 @@ module.exports = function(router, passport, paypal) {
 	var database = require('../lib/database');
 	var paypalUtil = require('../lib/paypal');
 	// Setup a route /galleria/images
-	
+
 	router.get('/getProducts', database.getProducts);
 
 	// process the signup form
@@ -132,35 +132,46 @@ module.exports = function(router, passport, paypal) {
 		res.render('paymentSuccess.ejs');
 	});
 
-	router.post('/pay', function(req, res) {
-		paypalUtil.pay().then(function(){
-			res.redirect('/secure/paymentSuccess');
-		},
-		function(err){
-			console.log(err);
-		});
+	router.get('/secure/paymentExecute', function(req, res) {
+		var paymentId = req.session.paymentId;
+		var payerId = req.param('PayerID');
+		console.log('payment id: ' + paymentId);
+		console.log('payer id: ' + payerId);
+
+		paypalUtil.paymentExecute(paymentId, payerId).then(function(paypalRes) {
+				res.send("Yeah!");
+			},
+			function(err) {
+				console.log(err);
+				for (var i in err.response.details){
+					console.log(err.response.details[i]);
+				}
+			});		
+	})
+
+	router.post('/paypaypal', function(req, res) {
+		paypalUtil.paypaypal().then(function(paypalRes) {
+
+				console.log('paypaypalresolved');
+				console.log('payment id:' + paypalRes.id);
+				req.session.paymentId = paypalRes.id;
+
+				var url = paypalRes.links[1].href;
+				console.log('url: ' + url);
+				res.redirect(url);
+			},
+			function(err) {
+				console.log(err);
+			});
 	});
 
-	router.post('/pay2', function(req, res) {
-		var card_data = {
-			"type": "visa",
-			"number": "4417119669820331",
-			"expire_month": "11",
-			"expire_year": "2018",
-			"cvv2": "123",
-			"first_name": "Joe",
-			"last_name": "Shopper"
-		};
-
-		paypal.creditCard.create(card_data, function(error, credit_card) {
-			if (error) {
-				console.log(error);
-				throw error;
-			} else {
-				console.log("Create Credit-Card Response");
-				console.log(credit_card);
-			}
-		})
+	router.post('/paycredit', function(req, res) {
+		paypalUtil.paycredit().then(function() {
+				res.redirect('/secure/paymentSuccess');
+			},
+			function(err) {
+				console.log(err);
+			});
 	});
 
 	router.post('/checkout', function(req, res) {
