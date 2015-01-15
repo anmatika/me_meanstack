@@ -1,7 +1,9 @@
-module.exports = function(router, passport, paypal) {
+module.exports = function(router, passport) {
 
 	var database = require('../lib/database');
 	var paypalUtil = require('../lib/paypal');
+	var util = require('util');
+
 	// Setup a route /galleria/images
 
 	router.get('/getProducts', database.getProducts);
@@ -20,62 +22,6 @@ module.exports = function(router, passport, paypal) {
 		failureFlash: true // allow flash messages
 	}));
 
-	router.get('/test', function(req, res) {
-		res.header('Content-type', 'text/html');
-		return res.end('<h1>Hello, Secure World!</h1>');
-	});
-
-	// router.post('/signup', function(req, res, next) { 
-
-	// 	passport.authenticate('local-signup', function(err, user, info) {
-	// 		if (err) {
-	// 	           	return next(err);
-	// 	       	}
-	//         console.log('user: ' + user);
-	//         if (!user) {
-	// 			console.log('info.message: ' + info.message);
-	//             return res.send({ success: false, message: info.message });
-	//         }
-
-	//         // login after succesful signup
-	//         req.login(user, function (err) {
-	//             if (err) {
-	//                 return next(err);
-	//             }
-	//             res.cookie('user', JSON.stringify({'id': user.id }), { httpOnly: false } );
-	//             return res.send({ success: true, user: req.user });
-	//         });
-	// 	})(req, res, next);
-	// });
-
-	// router.post('/login', function(req, res, next) { 
-
-	// 	passport.authenticate('local-login', function(err, user, info) {
-	// 		if (err) {
-	// 	           	return next(err);
-	// 	       	}
-	//         console.log('user: ' + user);
-	//         if (!user) {
-	//             // return res.send(401);
-	//             console.log('info.message: ' + info.message);
-	//             return res.send({ success: false, message: info.message });
-	//             // res.redirect('/login');
-	//         }
-
-	// 			// no errors user ok -> login
-	//         req.login(user, function (err) {
-	//             if (err) {
-	//                 return next(err);
-	//             }
-	//             res.cookie('user', JSON.stringify({'id': user.id }), { httpOnly: false } );
-	//             // res.cookie('email', JSON.stringify({'email': req.user.local.email }), { httpOnly: false } );
-	//             res.cookie('email', req.user.local.email, { httpOnly: false } );
-	//             return res.send({ success: true, user: req.user });
-	//             // return res.redirect('/');
-	//         });
-	// 	})(req, res, next);
-	// });
-
 	// get user from session
 	router.get('/getUser', function(req, res) {
 		res.send(req.isAuthenticated() ? req.user : '0');
@@ -86,11 +32,6 @@ module.exports = function(router, passport, paypal) {
 		res.clearCookie('email');
 		// res.send(200);
 		res.redirect('/');
-	});
-
-
-	router.get('/ping', function(req, res) {
-		res.send('pong');
 	});
 
 	// EJS-template:
@@ -128,40 +69,54 @@ module.exports = function(router, passport, paypal) {
 		});
 	});
 
-	router.get('/secure/paymentSuccess', function(req, res){
-		res.render('paymentSuccess.ejs');
+	router.get('/secure/orderComplete', function(req, res){
+		res.render('orderComplete.ejs');
 	});
 
 	router.get('/secure/paymentExecute', function(req, res) {
 		var paymentId = req.session.paymentId;
 		var payerId = req.param('PayerID');
+		console.log('/secure/paymentExecute');
 		console.log('payment id: ' + paymentId);
 		console.log('payer id: ' + payerId);
 
 		paypalUtil.paymentExecute(paymentId, payerId).then(function(paypalRes) {
-				res.send("Yeah!");
+				res.redirect('/secure/orderComplete')
 			},
 			function(err) {
-				console.log(err);
-				for (var i in err.response.details){
-					console.log(err.response.details[i]);
-				}
-			});		
+				console.log(util.inspect(err, {
+					showHidden: false,
+					depth: null
+				}));
+			});
 	})
 
 	router.post('/paypaypal', function(req, res) {
 		paypalUtil.paypaypal().then(function(paypalRes) {
 
-				console.log('paypaypalresolved');
+				var url;
+				console.log(util.inspect(paypalRes, {
+					showHidden: false,
+					depth: null
+				}));
+				console.log('paypaypal resolved');
 				console.log('payment id:' + paypalRes.id);
 				req.session.paymentId = paypalRes.id;
 
-				var url = paypalRes.links[1].href;
+				for (var i = 0; i < paypalRes.links.length; i++) {
+					var link = paypalRes.links[i];
+					if (link.method === 'REDIRECT') {
+						url = link.href;
+					}
+				}
 				console.log('url: ' + url);
 				res.redirect(url);
 			},
 			function(err) {
-				console.log(err);
+				console.log(util.inspect(err, {
+					showHidden: false,
+					depth: null
+				}));
 			});
 	});
 
@@ -170,7 +125,10 @@ module.exports = function(router, passport, paypal) {
 				res.redirect('/secure/paymentSuccess');
 			},
 			function(err) {
-				console.log(err);
+				console.log(util.inspect(err, {
+					showHidden: false,
+					depth: null
+				}));
 			});
 	});
 
@@ -179,12 +137,7 @@ module.exports = function(router, passport, paypal) {
 		var items = req.body;
 		req.session.checkedoutItems = items;
 		console.log(JSON.stringify(req.body));
-		// for (var i in items) {
-		// 	console.log('orderItems: ' + JSON.stringify(items[i]._name));
 
-		// }
-		// req.flash('orderItems', items);
-		// res.redirect('/secure/orderconfirmation');
 		res.send(items, 200);
 	});
 

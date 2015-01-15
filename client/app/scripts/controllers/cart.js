@@ -15,19 +15,14 @@ angular.module('meshopApp')
 
 		$scope.checkout = function() {
 			console.log('checkout func');
-			// $scope.summary = ngCart.toObject();
-
-			// scope.summary = ngCart.getItems();
-			// Post your cart to your resource
 			
-			// $http.post('/checkout', ngCart.toObject());
 		    
 		     $http.post('/checkout', ngCart.getItems()).success(function(data){
 		     	// $location.url('/secure/orderconfirmation');
+		     	
 		     	window.location.href = '/secure/orderconfirmation';
 		     });
 			
-			 // post('/checkout', ngCart.getItems());
 		}
 
 		$rootScope.$on('ngCart:change', function(){
