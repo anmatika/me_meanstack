@@ -7,26 +7,38 @@ paypal.configure({
 	'client_secret': 'ENo0HRBhNtB_JFOHYqIXeLI5wvCySj6hm4DGP9Iz9rylnOXsMpE4QgujTI4t'
 });
 
-exports.paypaypal = function() {
+exports.paypaypal = function(items) {
+
 	var deferred = q.defer();
+	var priceTotal = 0;
+
+	for (var i = 0; i < items.length; i++) {
+		priceTotal += items[i]._price;
+	}
+
+	priceTotal = priceTotal.toFixed(2);
+
+	console.log('price total:' + priceTotal);
 
 	var payment = {
-		"intent": "sale",
-		"payer": {
-			"payment_method": "paypal"
+		intent: "sale",
+		payer: {
+			payment_method: "paypal"
 		},
-		"redirect_urls": {
-			"return_url": "https://localhost/secure/paymentExecute",
-			"cancel_url": "https://localhost/cancelPayment"
+		redirect_urls: {
+			return_url: "https://localhost/secure/paymentExecute",
+			cancel_url: "https://localhost/cancelPayment"
 		},
-		"transactions": [{
-			"amount": {
-				"currency": "USD",
-				"total": "5.00"
+		transactions: [{
+			amount: {
+				currency: "USD",
+				total: "" + priceTotal
 			},
-			"description": "Pair of shoes"
+			description: "Pair of shoes, total: " + priceTotal
 		}]
 	};
+
+	console.log('payment' + JSON.stringify(payment));
 
 	paypal.payment.create(payment, function(err, paypalRes) {
 		if (err) {

@@ -25,7 +25,7 @@
         </li>
         <li id="signup" ng-show="!username || username.length == 0">
           <!-- <a ng-href="#/signup">Signup</a> -->
-          <a href="/signup">Sign up</a>
+          <a href="secure/signup">Sign up</a>
         </li>
         <li id="login" ng-show="!username || username.length == 0">
           <!-- <a ng-href="#/login">Login</a> -->
@@ -43,6 +43,7 @@
           <!-- <a class="pull-right" id="logout" ng-click="logout()">Logout</a> -->
           <a class="pull-right" id="logout" href="/logout">Logout</a>
           <span class="pull-right">&nbsp;|&nbsp;</span>
+          <div class="pull-right"><a href="/secure/account">Account</a></div>
           <div class="pull-right">{{ username }}</div>
         </div>
       </div>

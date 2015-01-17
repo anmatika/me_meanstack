@@ -10,7 +10,6 @@
 angular.module('meshopApp')
 	.controller('CartCtrl', ['$scope', '$rootScope', '$http', '$location', 'ngCart', function($scope, $rootScope, $http, $location, ngCart) {
 
-
 		$scope.items = ngCart.getItems();
 
 		$scope.checkout = function() {
@@ -20,7 +19,11 @@ angular.module('meshopApp')
 		     $http.post('/checkout', ngCart.getItems()).success(function(data){
 		     	// $location.url('/secure/orderconfirmation');
 		     	
-		     	window.location.href = '/secure/orderconfirmation';
+		     	if(data === 'notLogged'){
+		     		window.location.href = '/secure/customerDetails';
+		     	} else {
+		     		window.location.href = '/secure/orderconfirmation';
+		     	}
 		     });
 			
 		}

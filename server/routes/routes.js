@@ -4,8 +4,7 @@ module.exports = function(router, passport) {
 	var paypalUtil = require('../lib/paypal');
 	var util = require('util');
 
-	// Setup a route /galleria/images
-
+	/** get products from the db **/
 	router.get('/getProducts', database.getProducts);
 
 	// process the signup form
@@ -22,10 +21,16 @@ module.exports = function(router, passport) {
 		failureFlash: true // allow flash messages
 	}));
 
+	router.post('/customerDetails', function(req, res) {
+		console.log(req.body);
+		res.redirect('/');
+	});
+
 	// get user from session
 	router.get('/getUser', function(req, res) {
 		res.send(req.isAuthenticated() ? req.user : '0');
 	});
+
 
 	router.get('/logout', function(req, res) {
 		req.logOut();
@@ -60,6 +65,22 @@ module.exports = function(router, passport) {
 		});
 	});
 
+	router.get('/secure/customerDetails', function(req, res) {
+		// render the page and pass in any flash data if it exists
+		res.render('customerDetails.ejs', {
+			message: req.flash('')
+		});
+	});
+
+	router.get('/secure/account', function(req, res) {
+		var user = req.user;
+		res.render('account.ejs', {
+			message: '',
+			email: user.local.email,
+			firstname: user.local.firstname
+		});
+	});
+
 	router.get('/secure/orderconfirmation', function(req, res) {
 		// render the page and pass in any flash data if it exists
 		// var items = req.flash('orderItems');
@@ -69,10 +90,12 @@ module.exports = function(router, passport) {
 		});
 	});
 
-	router.get('/secure/orderComplete', function(req, res){
+	router.get('/secure/orderComplete', function(req, res) {
 		res.render('orderComplete.ejs');
 	});
 
+	/** success redirect route from paypal
+	 **/
 	router.get('/secure/paymentExecute', function(req, res) {
 		var paymentId = req.session.paymentId;
 		var payerId = req.param('PayerID');
@@ -80,6 +103,7 @@ module.exports = function(router, passport) {
 		console.log('payment id: ' + paymentId);
 		console.log('payer id: ' + payerId);
 
+		// execute paypent
 		paypalUtil.paymentExecute(paymentId, payerId).then(function(paypalRes) {
 				res.redirect('/secure/orderComplete')
 			},
@@ -91,16 +115,43 @@ module.exports = function(router, passport) {
 			});
 	})
 
-	router.post('/paypaypal', function(req, res) {
-		paypalUtil.paypaypal().then(function(paypalRes) {
-
-				var url;
-				console.log(util.inspect(paypalRes, {
+	router.post('/secure/account', function(req, res) {
+		var user = req.user;
+		console.log(util.inspect(req.body, {
 					showHidden: false,
 					depth: null
 				}));
+		
+		user.local.firstname = req.body.firstname;
+		user.local.lastname = req.body.lastname;
+		user.save(function(err) {
+			if (err)
+				throw err;
+			
+		});
+
+		res.redirect('/');
+	});
+
+	// pay button invoked
+	router.post('/paypaypal', function(req, res) {
+		var items = req.session.checkedoutItems;
+		if (items === undefined) {
+			res.redirect('/sessionExpired');
+		}
+
+		console.log('checked out items: ' + util.inspect(items, {
+			showHidden: false,
+			depth: null
+		}));
+
+		paypalUtil.paypaypal(items).then(function(paypalRes) {
+
+				var url;
+
 				console.log('paypaypal resolved');
 				console.log('payment id:' + paypalRes.id);
+
 				req.session.paymentId = paypalRes.id;
 
 				for (var i = 0; i < paypalRes.links.length; i++) {
@@ -120,6 +171,7 @@ module.exports = function(router, passport) {
 			});
 	});
 
+	// pay by credit card
 	router.post('/paycredit', function(req, res) {
 		paypalUtil.paycredit().then(function() {
 				res.redirect('/secure/paymentSuccess');
@@ -132,7 +184,10 @@ module.exports = function(router, passport) {
 			});
 	});
 
-	router.post('/checkout', function(req, res) {
+	// check out invoked from the cart 
+	// store checked out items into session
+	// respond the ajax
+	router.post('/checkout', isLoggedInAjax, function(req, res) {
 
 		var items = req.body;
 		req.session.checkedoutItems = items;
@@ -141,9 +196,18 @@ module.exports = function(router, passport) {
 		res.send(items, 200);
 	});
 
+	function isLoggedInAjax(req, res, next) {
+		// if user is authenticated in the session, carry on 
+		if (req.isAuthenticated())
+			return next();
+
+		res.send('notLogged');
+	}
+
 	// route middleware to make sure a user is logged in
 	function isLoggedIn(req, res, next) {
 
+		console.log('isLoggedIn hit');
 		// if user is authenticated in the session, carry on 
 		if (req.isAuthenticated())
 			return next();
