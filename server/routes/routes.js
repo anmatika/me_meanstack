@@ -73,12 +73,33 @@ module.exports = function(router, passport) {
 	});
 
 	router.get('/secure/account', function(req, res) {
+		
 		var user = req.user;
-		res.render('account.ejs', {
+		var response = {
 			message: '',
-			email: user.local.email,
-			firstname: user.local.firstname
-		});
+			email: '',
+			firstname: '',
+			lastname: '',
+			address: '',
+			postalcode: '',
+			city: '',
+			country: '',
+			email: ''
+		}
+
+		if (user) {
+			response.message = '',
+			response.email = user.local.email,
+			response.firstname = user.local.firstname,
+			response.lastname = user.local.lastname,
+			response.address = user.local.address,
+			response.postalcode = user.local.postalcode,
+			response.city = user.local.city,
+			response.country = user.local.country,
+			response.email = user.local.email
+		}
+
+		res.render('account.ejs', response);
 	});
 
 	router.get('/secure/orderconfirmation', function(req, res) {
@@ -116,7 +137,9 @@ module.exports = function(router, passport) {
 	})
 
 	router.post('/secure/account', function(req, res) {
+		
 		var user = req.user;
+
 		console.log(util.inspect(req.body, {
 					showHidden: false,
 					depth: null
@@ -124,6 +147,11 @@ module.exports = function(router, passport) {
 		
 		user.local.firstname = req.body.firstname;
 		user.local.lastname = req.body.lastname;
+		user.local.address = req.body.address,
+		user.local.postalcode = req.body.postalcode,
+		user.local.city = req.body.city,
+		user.local.country = req.body.country
+
 		user.save(function(err) {
 			if (err)
 				throw err;
