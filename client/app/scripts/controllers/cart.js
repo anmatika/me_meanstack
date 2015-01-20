@@ -20,7 +20,7 @@ angular.module('meshopApp')
 		     	// $location.url('/secure/orderconfirmation');
 		     	
 		     	if(data === 'notLogged'){
-		     		window.location.href = '/secure/account';
+		     		window.location.href = '/secure/loginOrCreateNewAccount';
 		     	} else {
 		     		window.location.href = '/secure/orderconfirmation';
 		     	}

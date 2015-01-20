@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1><span class="fa fa-sign-in"></span>Order confirmation</h1>
+        <form action="/secure/paypaypal" method="post">
+            <div class="table-responsive col-sm-12">
+                <table class="table table-striped ngCart cart" >
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                    {{#each items}}
+                    <tr>
+                        <td>{{this._name }}</td>
+                        <td>{{this._price }}</td>
+                        <td>{{this._quantity }}</td>
+                    </tr>
+                    {{/each}}
+                </table>
+                <button type="submit" class="btn btn-warning btn-lg">Pay</button>
+            </div>
+        </form>
+        <hr>
+    </div>
+</div>

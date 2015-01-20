@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
+var exphbs  = require('express-handlebars');
 var router = express.Router();
 var mongoose = require("mongoose");
 var configDb = require('./config/db');
@@ -27,7 +28,11 @@ var HOST = 'localhost';
 // var https_server = require('https').createServer(https_options, app);
 var api = express();
 
-app.set('view engine', 'ejs'); // set up ejs
+// app.set('view engine', 'ejs'); // set up ejs
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
 require('./config/passport')(passport); // pass passport for configuration
 mongoose.connect(configDb.url);
 

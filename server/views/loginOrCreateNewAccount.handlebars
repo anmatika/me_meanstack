@@ -1,0 +1,27 @@
+<div id="loginOrCreateAccount">
+	<ul>
+		<li>
+			<div class="container">
+				<div class="col-sm-6 col-sm-offset-3">
+					<h1><span class="fa fa-sign-in"></span> Login</h1>					
+						<form action="/secure/loginAndContinueOrder" method="post">
+    						{{>loginDetails}}
+    						<button type="submit" class="btn btn-warning btn-lg">Login</button>
+						</form>
+					<hr>
+					
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="container">
+				<div class="col-sm-6 col-sm-offset-3">
+					<h1><span class="fa fa-sign-in"></span> Signup</h1>
+						{{>signupForm}}
+					<hr>
+					
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>

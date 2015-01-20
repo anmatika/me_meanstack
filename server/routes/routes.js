@@ -7,17 +7,25 @@ module.exports = function(router, passport) {
 	/** get products from the db **/
 	router.get('/getProducts', database.getProducts);
 
+
 	// process the signup form
-	router.post('/signup', passport.authenticate('local-signup', {
+	router.post('/secure/signup', passport.authenticate('local-signup', {
 		successRedirect: '/', // redirect to the secure profile section
-		failureRedirect: '/signup', // redirect back to the signup page if there is an error
+		failureRedirect: '/secure/signup', // redirect back to the signup page if there is an error
 		failureFlash: true // allow flash messages
 	}));
 
 	// // // process the login form
-	router.post('/login', passport.authenticate('local-login', {
+	router.post('/secure/login', passport.authenticate('local-login', {
 		successRedirect: '/', // redirect to the secure profile section
-		failureRedirect: '/login', // redirect back to the signup page if there is an error
+		failureRedirect: '/secure/login', // redirect back to the signup page if there is an error
+		failureFlash: true // allow flash messages
+	}));
+
+	// // // process the login form
+	router.post('/secure/loginAndContinueOrder', passport.authenticate('local-login', {
+		successRedirect: '/secure/customerDetails', // redirect to the secure profile section
+		failureRedirect: '/', // redirect back to the signup page if there is an error
 		failureFlash: true // allow flash messages
 	}));
 
@@ -53,15 +61,22 @@ module.exports = function(router, passport) {
 
 	router.get('/secure/login', function(req, res) {
 		// render the page and pass in any flash data if it exists
-		res.render('login.ejs', {
-			message: req.flash('loginMessage')
+		var message = req.flash('loginMessage');
+		var isMessage = message.length > 0;
+		res.render('login', {
+			message: message,
+			isMessage: isMessage
 		});
 	});
 
 	router.get('/secure/signup', function(req, res) {
 		// render the page and pass in any flash data if it exists
-		res.render('signup.ejs', {
-			message: req.flash('signupMessage')
+		var message = req.flash('loginMessage');
+		var isMessage = message.length > 0;
+
+		res.render('signup', {
+			message: message,
+			isMessage: isMessage
 		});
 	});
 
@@ -72,6 +87,7 @@ module.exports = function(router, passport) {
 		});
 	});
 
+	/* get account details */
 	router.get('/secure/account', function(req, res) {
 		
 		var user = req.user;
@@ -106,7 +122,7 @@ module.exports = function(router, passport) {
 		// render the page and pass in any flash data if it exists
 		// var items = req.flash('orderItems');
 		var items = req.session.checkedoutItems;
-		res.render('orderConfirmation.ejs', {
+		res.render('orderConfirmation', {
 			items: items
 		});
 	});
@@ -136,6 +152,11 @@ module.exports = function(router, passport) {
 			});
 	})
 
+	router.get('/secure/loginOrCreateNewAccount', function(req, res) {
+		res.render('loginOrCreateNewAccount', {message: ''});
+	})
+
+	/* save account details*/
 	router.post('/secure/account', function(req, res) {
 		
 		var user = req.user;
@@ -155,14 +176,13 @@ module.exports = function(router, passport) {
 		user.save(function(err) {
 			if (err)
 				throw err;
-			
 		});
 
 		res.redirect('/');
 	});
 
 	// pay button invoked
-	router.post('/paypaypal', function(req, res) {
+	router.post('/secure/paypaypal', function(req, res) {
 		var items = req.session.checkedoutItems;
 		if (items === undefined) {
 			res.redirect('/sessionExpired');
@@ -215,6 +235,7 @@ module.exports = function(router, passport) {
 	// check out invoked from the cart 
 	// store checked out items into session
 	// respond the ajax
+	// send items if user logged in otherwise send 'notLogged'
 	router.post('/checkout', isLoggedInAjax, function(req, res) {
 
 		var items = req.body;
@@ -243,5 +264,4 @@ module.exports = function(router, passport) {
 		// if they aren't redirect them to the home page
 		res.redirect('/');
 	}
-
 }
