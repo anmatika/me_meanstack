@@ -22,7 +22,7 @@ angular.module('meshopApp')
 		     	if(data === 'notLogged'){
 		     		window.location.href = '/secure/loginOrCreateNewAccount';
 		     	} else {
-		     		window.location.href = '/secure/orderconfirmation';
+		     		window.location.href = '/secure/orderphase1';
 		     	}
 		     });
 			

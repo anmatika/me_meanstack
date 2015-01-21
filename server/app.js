@@ -92,6 +92,9 @@ if (app.get('env') === 'production') {
     });
 }
 
+// for server side styles
+app.use(express.static(path.join(__dirname, '/styles/css')));
+
 //HTTPS Api Server
 https.createServer(https_options, app).listen(8000, function(){
   console.log("Api server listening on port " + app.get('ssl_port'));

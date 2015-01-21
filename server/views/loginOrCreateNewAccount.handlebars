@@ -16,8 +16,13 @@
 		<li>
 			<div class="container">
 				<div class="col-sm-6 col-sm-offset-3">
-					<h1><span class="fa fa-sign-in"></span> Signup</h1>
-						{{>signupForm}}
+					<h1>
+						<form action="/secure/signup" method="get">
+							<button type="submit">Signup</button>
+						</form>
+						<form action="/secure/orderphase1" method="get">
+							<button type="submit">Order as guest</button>
+						</form>
 					<hr>
 					
 				</div>

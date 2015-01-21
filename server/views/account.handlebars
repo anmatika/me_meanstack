@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1><span class="fa fa-sign-in"></span>Account</h1>
+        <!-- show any messages that come back with authentication -->
+        {{#if isMessage }}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+        {{/if}}
+        <h2>Address</h2>
+            <form action="/secure/account" method="post">
+                {{>customerDetails}}
+                <button type="submit" class="btn btn-warning btn-lg">Save</button>
+            </form>
+        <hr>
+    </div>
+</div>
