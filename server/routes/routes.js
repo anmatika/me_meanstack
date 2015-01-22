@@ -42,7 +42,8 @@ module.exports = function(router, passport) {
 			address: address,
 			postalcode: postalcode,
 			city: city,
-			country: country
+			country: country,
+			phase: 1
 		});
 	});
 
@@ -93,9 +94,9 @@ module.exports = function(router, passport) {
 	
 	router.get('/secure/orderphase2', function(req, res){
 		
-		
-
-		res.render('orderphase2');
+		res.render('orderphase2', {
+			phase: 2
+		});
 	});
 
 	router.post('/secure/orderphase3', function(req, res){
@@ -108,7 +109,8 @@ module.exports = function(router, passport) {
 		// var items = req.flash('orderItems');
 		var items = req.session.checkedoutItems;
 		res.render('orderphase3', {
-			items: items
+			items: items,
+			phase: 3
 		});
 	});
 
