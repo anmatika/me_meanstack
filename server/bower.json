@@ -1,0 +1,21 @@
+{
+  "name": "meshop",
+  "version": "0.0.0",
+  "homepage": "https://github.com/anmatika/me_meanstack",
+  "authors": [
+    "anmatika <4ntti.matikainen@gmail.com>"
+  ],
+  "description": "server side bower",
+  "main": "bower",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-2.1.0.min": "http://code.jquery.com/jquery-2.1.0.min.js"
+  }
+}

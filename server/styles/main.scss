@@ -1,6 +1,17 @@
-div {
-	a{
-		color: orange;
-		border-radius: 21px;
-	}
+@import 'variables';
+
+.navbar-inverse {
+	background-color: $navbarColor;
+}
+.navbar-inverse a {
+	color: #fff !important;
+}
+
+#maincontent {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+body { 
+	padding-top:80px; 
 }

@@ -1,11 +1,13 @@
 <link rel="stylesheet" href="/progressbar.css">
 
 <div id="progressBar">
-	<span> Phase: {{ phase }} / 3 </span>
-	<input type="text" value="{{phase}}" />
+	<input id="phase" type="hidden" value="{{phase}}" />
 	<ul>
-		<li>Address</li>
-		<li>Shipping method</li>
-		<li>Order Summary</li>
+		<li id="address"><a href="/secure/orderphase1">Address</a></li>
+		<li id="shipping"><a href="/secure/orderphase2">Shipping method</a></li>
+		<li id="summary"><a href="/secure/orderphase3">Order Summary</a></li>
 	</ul>
 </div>
+
+<script src="/jquery-2.1.0.min/index.js" ></script>
+<script src="/progressBar.js" ></script>

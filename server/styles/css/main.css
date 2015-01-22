@@ -1,5 +1,20 @@
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/main\.scss}line{font-family:\000032}}
-div a {
-  color: orange;
-  border-radius: 21px;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/main\.scss}line{font-family:\000033}}
+.navbar-inverse {
+  background-color: #107BED;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/main\.scss}line{font-family:\000036}}
+.navbar-inverse a {
+  color: #fff !important;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/main\.scss}line{font-family:\0000310}}
+#maincontent {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/main\.scss}line{font-family:\0000315}}
+body {
+  padding-top: 80px;
 }

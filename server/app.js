@@ -92,8 +92,14 @@ if (app.get('env') === 'production') {
     });
 }
 
-// for server side styles
+// add static files serving for server side styles
 app.use(express.static(path.join(__dirname, '/styles/css')));
+
+// add static files serving for server side bower_components
+app.use(express.static(path.join(__dirname, '/bower_components')));
+
+// add static files serving for server side scripts
+app.use(express.static(path.join(__dirname, '/scripts')));
 
 //HTTPS Api Server
 https.createServer(https_options, app).listen(8000, function(){
