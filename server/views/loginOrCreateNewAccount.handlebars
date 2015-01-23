@@ -1,32 +1,33 @@
+<link rel="stylesheet" href="/loginOrCreateAccount.css">
 <div id="loginOrCreateAccount">
-	<ul>
-		<li>
-			<div class="container">
-				<div class="col-sm-6 col-sm-offset-3">
-					<h1><span class="fa fa-sign-in"></span> Login</h1>					
-						<form action="/secure/loginAndContinueOrder" method="post">
-    						{{>loginDetails}}
-    						<button type="submit" class="btn btn-warning btn-lg">Login</button>
-						</form>
-					<hr>
-					
-				</div>
+	<div class="container">
+		<div class="col-sm-12">
+			<div class="row">
+				<ul>
+					<div class="boxes col-sm-6" id="loginBox">
+						<li>
+							<h1><span class="fa fa-sign-in"></span> Login</h1>
+							<form action="/secure/loginAndContinueOrder" method="post">
+								{{>loginDetails}}
+								<button type="submit" class="btn btn-warning btn-lg">Login</button>
+							</form>
+						</li>
+					</div>
+					<div class="boxes col-sm-6" id="signupBox">
+						<li>
+							<h1><span class="fa fa-sign-in"></span>New customer</h1>
+							<div id="buttons">
+								<form id="signup" action="/secure/signup" method="get">
+									<button class="btn btn-warning btn-lg" type="submit">Signup</button>
+								</form>
+								<form id="orderguest" action="/secure/orderphase1" method="get">
+									<button class="btn btn-warning btn-lg" type="submit">Order as guest</button>
+								</form>
+							</div>
+						</li>
+					</div>
+				</ul>
 			</div>
-		</li>
-		<li>
-			<div class="container">
-				<div class="col-sm-6 col-sm-offset-3">
-					<h1>
-						<form action="/secure/signup" method="get">
-							<button type="submit">Signup</button>
-						</form>
-						<form action="/secure/orderphase1" method="get">
-							<button type="submit">Order as guest</button>
-						</form>
-					<hr>
-					
-				</div>
-			</div>
-		</li>
-	</ul>
+		</div>
+	</div>
 </div>

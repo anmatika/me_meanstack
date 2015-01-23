@@ -13,7 +13,6 @@ ul{
 		display: block;
 		list-style: none;
 		float: left;
-		cursor: pointer;
 
 		-webkit-border-top-right-radius: 10px;
         -moz-border-radius-topright: 10px;
@@ -21,7 +20,7 @@ ul{
         -webkit-border-top-left-radius: 10px;
         -moz-border-radius-topleft: 10px;
         border-top-left-radius: 10px;
-        a {
+        span {
         	margin: 0px; 
         	display: block; 
         	width: 100%; 
@@ -30,16 +29,10 @@ ul{
         	text-decoration: inherit;
         	color: inherit;
         }
-        a:hover{
-        	text-decoration: inherit;
-        	color: inherit;	
-        }
-
 	}
 }
 
 #progressBar {
-	padding: 0 0 100px 0;
 }
 
 .activeProgressBar {

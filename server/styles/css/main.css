@@ -18,3 +18,10 @@
 body {
   padding-top: 80px;
 }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/main\.scss}line{font-family:\0000319}}
+.orderBox {
+  border-radius: 10px;
+  padding-top: 50px;
+  border: 2px solid;
+}

@@ -1,0 +1,8 @@
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/shippingDetails\.scss}line{font-family:\000033}}
+#shippingMethod #shippingMethods {
+  padding: 10px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/shippingDetails\.scss}line{font-family:\000035}}
+#shippingMethod #shippingMethods input {
+  clear: both;
+}

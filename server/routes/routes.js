@@ -108,8 +108,35 @@ module.exports = function(router, passport) {
 		// render the page and pass in any flash data if it exists
 		// var items = req.flash('orderItems');
 		var items = req.session.checkedoutItems;
+		var firstname;
+		var user = {
+			firstname: '',
+			lastname: '',
+			address: '',
+			postalcode: '',
+			city: '',
+			country: ''
+		};
+
+		if(req.user){
+			user.firstname = user.local.firstname;
+			user.lastname = user.local.lastname;
+			user.address = user.local.address;
+			user.postalcode = user.local.postalcode;
+			user.city = user.local.city;
+			user.country = user.local.country;
+		} else {
+			user.firstname = req.session.firstname;
+			user.lastname = req.session.lastname;
+			user.address = req.session.address;
+			user.postalcode = req.session.postalcode;
+			user.city = req.session.city;
+			user.country = req.session.country;
+		}
+
 		res.render('orderphase3', {
 			items: items,
+			user: user,
 			phase: 3
 		});
 	});

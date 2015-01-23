@@ -10,12 +10,11 @@ ul li {
   display: block;
   list-style: none;
   float: left;
-  cursor: pointer;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/progressbar\.scss}line{font-family:\0000324}}
-ul li a {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/progressbar\.scss}line{font-family:\0000323}}
+ul li span {
   margin: 0px;
   display: block;
   width: 100%;
@@ -24,18 +23,8 @@ ul li a {
   text-decoration: inherit;
   color: inherit;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/progressbar\.scss}line{font-family:\0000333}}
-ul li a:hover {
-  text-decoration: inherit;
-  color: inherit;
-}
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/progressbar\.scss}line{font-family:\0000341}}
-#progressBar {
-  padding: 0 0 100px 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/progressbar\.scss}line{font-family:\0000345}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/progressbar\.scss}line{font-family:\0000338}}
 .activeProgressBar {
   background-color: #107BED;
   font-weight: bold;
