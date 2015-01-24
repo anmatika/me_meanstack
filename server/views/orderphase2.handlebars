@@ -3,12 +3,17 @@
 		{{>progressBar}}
 	</div>
 </div>
-<form action="/secure/orderphase3" method="post">
-	<div class="container orderBox">
-		<div class="col-sm-6 col-sm-offset-3">
+<div class="container orderBox">
+	<div class="col-sm-6 col-sm-offset-3">
+		{{#if isMessage }}
+		<div class="alert alert-danger">
+			{{ message }}
+		</div>
+		{{/if}}
+		<form action="/secure/orderphase3" method="post">
 			{{>shippingDetails}}
 			<button type="submit" class="pull-right btn btn-warning btn-lg">Continue</button>
 			<a class="btn btn-warning btn-lg" href="/secure/orderphase1">Back</a>
-		</div>
+		</form>
 	</div>
-</form>
+</div>

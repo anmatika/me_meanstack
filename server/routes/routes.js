@@ -3,6 +3,7 @@ module.exports = function(router, passport) {
 	var database = require('../lib/database');
 	var paypalUtil = require('../lib/paypal');
 	var util = require('util');
+	var validator = require('validator');
 
 	/** get products from the db **/
 	router.get('/getProducts', database.getProducts);
@@ -94,13 +95,34 @@ module.exports = function(router, passport) {
 	
 	router.get('/secure/orderphase2', function(req, res){
 		
+		var message = req.flash('message');
+		
 		res.render('orderphase2', {
-			phase: 2
+			phase: 2,
+			message: message,
+			isMessage: message.length > 0
 		});
 	});
 
 	router.post('/secure/orderphase3', function(req, res){
 		// todo: shipping details saving
+		console.log(util.inspect(req.body, {
+					showHidden: false,
+					depth: null
+				}));
+		
+		var valid = validator.isNumeric(req.body.shippingMethod);
+
+		console.log('isvalid: ' + valid);
+
+		if (!valid) {
+			req.flash('message', 'shippingMethod must be selected');
+			return res.redirect('/secure/orderphase2');
+		}
+
+		req.session.shippingMethod = req.body.shippingMethod;
+		console.log('shippingMethod: ' + req.session.shippingMethod);
+
 		res.redirect('orderphase3');
 	});
 
