@@ -6,5 +6,12 @@
 			clear: both;
 		}
 	}
+	.row {
+		padding: 5px;
+	}
+	.row:hover {
+		border: 2px solid;
+		cursor: pointer;
+	}
 
 }
