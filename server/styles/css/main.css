@@ -22,6 +22,7 @@ body {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/main\.scss}line{font-family:\0000319}}
 .orderBox {
   border-radius: 10px;
-  padding-top: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border: 2px solid;
 }

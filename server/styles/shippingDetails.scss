@@ -1,5 +1,9 @@
+@import 'variables';
+
 #shippingMethod {
 	
+	margin-bottom: 25px;
+
 	#shippingMethods {
 		padding: 10px;
 		input {
@@ -10,7 +14,7 @@
 		padding: 5px;
 	}
 	.row:hover {
-		border: 2px solid;
+		border: 2px solid $navbarColor;
 		cursor: pointer;
 	}
 

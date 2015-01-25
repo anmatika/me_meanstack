@@ -1,17 +1,21 @@
 @media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/shippingDetails\.scss}line{font-family:\000033}}
+#shippingMethod {
+  margin-bottom: 25px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/shippingDetails\.scss}line{font-family:\000037}}
 #shippingMethod #shippingMethods {
   padding: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/shippingDetails\.scss}line{font-family:\000035}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/shippingDetails\.scss}line{font-family:\000039}}
 #shippingMethod #shippingMethods input {
   clear: both;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/shippingDetails\.scss}line{font-family:\000039}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/shippingDetails\.scss}line{font-family:\0000313}}
 #shippingMethod .row {
   padding: 5px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/shippingDetails\.scss}line{font-family:\0000312}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/antti\/code\/meshop\/server\/styles\/shippingDetails\.scss}line{font-family:\0000316}}
 #shippingMethod .row:hover {
-  border: 2px solid;
+  border: 2px solid #107BED;
   cursor: pointer;
 }
