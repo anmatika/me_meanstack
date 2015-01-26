@@ -4,6 +4,7 @@ module.exports = function(router, passport) {
 	var paypalUtil = require('../lib/paypal');
 	var util = require('util');
 	var validator = require('validator');
+	var i18n = require('i18next');
 
 	/** get products from the db **/
 	router.get('/getProducts', database.getProducts);
@@ -43,7 +44,7 @@ module.exports = function(router, passport) {
 			address: address,
 			postalcode: postalcode,
 			city: city,
-			country: country,
+			country: country,		 	
 			phase: 1
 		});
 	});
@@ -207,9 +208,9 @@ module.exports = function(router, passport) {
 		user.local.firstname = req.body.firstname;
 		user.local.lastname = req.body.lastname;
 		user.local.address = req.body.address,
-			user.local.postalcode = req.body.postalcode,
-			user.local.city = req.body.city,
-			user.local.country = req.body.country
+		user.local.postalcode = req.body.postalcode,
+		user.local.city = req.body.city,
+		user.local.country = req.body.country
 
 		user.save(function(err) {
 			if (err)
@@ -219,11 +220,18 @@ module.exports = function(router, passport) {
 		res.redirect('/');
 	});
 	
-
+	
 	// process the signup form
 	router.post('/secure/signup', passport.authenticate('local-signup', {
 		successRedirect: '/', // redirect to the secure profile section
 		failureRedirect: '/secure/signup', // redirect back to the signup page if there is an error
+		failureFlash: true // allow flash messages
+	}));
+
+	// process the signup form
+	router.post('/secure/signupAndContinueOrder', passport.authenticate('local-signup', {
+		successRedirect: '/secure/orderphase1', // redirect to the secure profile section
+		failureRedirect: '/', // redirect back to the signup page if there is an error
 		failureFlash: true // allow flash messages
 	}));
 
@@ -273,33 +281,29 @@ module.exports = function(router, passport) {
 
 	router.get('/secure/login', function(req, res) {
 		// render the page and pass in any flash data if it exists
+		
+		
 		var message = req.flash('loginMessage');
-		var isMessage = message.length > 0;
+		var errorMessage = req.flash('error');
+		var isMessage = message.length > 0 || errorMessage.length > 0;
+
 		res.render('login', {
-			message: message,
+			message: message != '' ? message : errorMessage,
 			isMessage: isMessage
 		});
 	});
 
 	router.get('/secure/signup', function(req, res) {
 		// render the page and pass in any flash data if it exists
-		var message = req.flash('loginMessage');
-		var isMessage = message.length > 0;
+		var message = req.flash('signupMessage');
+		var errorMessage = req.flash('error');
+		var isMessage = message.length > 0 || errorMessage.length > 0;
 
 		res.render('signup', {
-			message: message,
-			isMessage: isMessage
+			message: message != '' ? message : errorMessage,
+			isMessage: isMessage 
 		});
 	});
-
-	router.get('/secure/customerDetails', function(req, res) {
-		// render the page and pass in any flash data if it exists
-		res.render('customerDetails.ejs', {
-			message: req.flash('')
-		});
-	});
-
-	
 
 	router.get('/secure/orderComplete', function(req, res) {
 		res.render('orderComplete.ejs');

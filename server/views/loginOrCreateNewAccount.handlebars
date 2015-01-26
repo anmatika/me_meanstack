@@ -9,16 +9,16 @@
 							<h1><span class="fa fa-sign-in"></span> Login</h1>
 							<form action="/secure/loginAndContinueOrder" method="post">
 								{{>loginDetails}}
-								<button type="submit" class="btn btn-warning btn-lg">Login</button>
+								<button type="submit" class="btn btn-success btn-lg">Login</button>
 							</form>
 						</li>
 					</div>
 					<div class="boxes col-sm-6" id="signupBox">
 						<li>
-							<h1><span class="fa fa-sign-in"></span>New customer</h1>
+							<h1><span class="fa fa-user"></span>New customer</h1>
 							<div id="buttons">
 								<form id="signup" action="/secure/signup" method="get">
-									<button class="btn btn-warning btn-lg" type="submit">Signup</button>
+									<button class="btn btn-success btn-lg" type="submit">Signup</button>
 								</form>
 								<form id="orderguest" action="/secure/orderphase1" method="get">
 									<button class="btn btn-warning btn-lg" type="submit">Order as guest</button>

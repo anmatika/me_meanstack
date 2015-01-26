@@ -6,6 +6,13 @@
 <form action="/secure/orderphase2" method="post">
 	<div class="container orderBox">
 		<div class="col-sm-6 col-sm-offset-3">
+			{{#if isMessage }}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+			{{/if}}
+			{{ t "app.name" }}
+			{{!-- {{t "app.name" }} --}}
 			{{>customerDetails}}
 			<button type="submit" class="pull-right btn btn-warning btn-lg">Continue</button>
 		</div>

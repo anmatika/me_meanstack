@@ -18,19 +18,23 @@ var https = require('https');
 var http = require('http');
 var key = fs.readFileSync('/usr/local/etc/ssl/key.pem');
 var cert = fs.readFileSync('/usr/local/etc/ssl/cert.pem');
+var i18n = require('i18next');
 
 var https_options = {
     key: key,
     cert: cert
 };
+
 var PORT = 8000;
 var HOST = 'localhost';
-// var https_server = require('https').createServer(https_options, app);
 var api = express();
 
-// app.set('view engine', 'ejs'); // set up ejs
-
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+var hbs = exphbs.create({
+    defaultLayout: 'main',   
+    helpers: require('./lib/helpers')(i18n)
+});
+// app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 require('./config/passport')(passport); // pass passport for configuration
@@ -48,6 +52,11 @@ app.use(session({ secret: 'fhappylfjkl3jklovec312yesdvdgood' })); // session sec
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+
+
+// default: using 'accept-language' header to guess language settings
+// app.use(i18n.init);
+i18n.init({ lng: "en-US" });
 
 
 
