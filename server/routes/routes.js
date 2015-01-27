@@ -194,7 +194,6 @@ module.exports = function(router, passport) {
 		res.render('account', response);
 	});
 
-
 	/* save account details*/
 	router.post('/secure/account', function(req, res) {
 
@@ -219,8 +218,7 @@ module.exports = function(router, passport) {
 
 		res.redirect('/');
 	});
-	
-	
+		
 	// process the signup form
 	router.post('/secure/signup', passport.authenticate('local-signup', {
 		successRedirect: '/', // redirect to the secure profile section
@@ -281,8 +279,6 @@ module.exports = function(router, passport) {
 
 	router.get('/secure/login', function(req, res) {
 		// render the page and pass in any flash data if it exists
-		
-		
 		var message = req.flash('loginMessage');
 		var errorMessage = req.flash('error');
 		var isMessage = message.length > 0 || errorMessage.length > 0;

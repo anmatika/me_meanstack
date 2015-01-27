@@ -56,9 +56,10 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // default: using 'accept-language' header to guess language settings
 // app.use(i18n.init);
-i18n.init({ lng: "en-US" });
+// i18n.init({ lng: "en-US" });
+i18n.init({ lng: "fi" });
 
-
+// i18n.setLng('en-US', function(t) { /* loading done */ });
 
 /**
  * Development Settings

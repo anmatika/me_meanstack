@@ -1,0 +1,18 @@
+{
+  "app": {
+    "name": "mekauppa"
+  },
+  "nav": {
+    "home": "Koti"
+  },
+  "continue": "Jatka",
+  "customer details": "Asiakastiedot",
+  "firstname": "Etunimi",
+  "lastname": "Sukunimi",
+  "address": "Osoite",
+  "postal code": "Postinumero",
+  "city": "Kaupunki",
+  "country": "Maa",
+  "shipping method": "Lähetystapa",
+  "back": "Takaisin"
+}
