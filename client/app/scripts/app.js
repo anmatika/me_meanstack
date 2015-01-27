@@ -4,7 +4,7 @@
  * @ngdoc overview
  * @name meshopApp
  * @description
- * # 
+ * #
  *
  * Main module of the application.
  */
@@ -16,14 +16,15 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngCart'
+    'ngCart',
+    'pascalprecht.translate'
   ])
-  .config(function ($routeProvider) {
-  $routeProvider
+  .config(function($routeProvider, $translateProvider) {
+    $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
-      })      
+      })
       .when('/contact', {
         templateUrl: 'views/contact.html',
         controller: 'ContactCtrl'
@@ -51,4 +52,35 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+
+      $translateProvider.translations('en', {
+        about: 'About',
+        services: 'Services',
+        contact: 'Contact',
+        signUp: 'Sign up',
+        login: 'Log in',
+        addToCart: 'Add to cart',
+        thisItemIsInYourCart: 'This item is in your cart',
+        quantity: 'Quantity',
+        price: 'Price',
+        total: 'Total',
+        checkout: 'Checkout',
+        logout: 'Log out',
+        account: 'Account'
+      }).translations('fi', {
+        about: 'Tietoja meistä',
+        services: 'Palvelut',
+        contact: 'Yhteystiedot',
+        signUp: 'Rekisteröidy',
+        login: 'Kirjaudu',
+        addToCart: 'Ostoskoriin',
+        thisItemIsInYourCart: 'Tuote lisätty ostoskoriisi',
+        quantity: 'Määrä',
+        price: 'Hinta',
+        total: 'Yhteensä',
+        checkout: 'Kassalle',
+        logout: 'Kirjaudu ulos',
+        account: 'Tili'
+      });
+      $translateProvider.preferredLanguage('fi');
   });

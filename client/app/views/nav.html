@@ -15,21 +15,21 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li>
-          <a href="#/">About</a>
+          <a href="#/">{{ 'about' | translate }}</a>
         </li>
         <li>
-          <a href="#/">Services</a>
+          <a href="#/">{{ 'services' | translate }}</a>
         </li>
         <li>
-          <a ng-href="#/contact">Contact</a>
+          <a ng-href="#/contact">{{'contact' | translate}}</a>
         </li>
         <li id="signup" ng-show="!username || username.length == 0">
           <!-- <a ng-href="#/signup">Signup</a> -->
-          <a href="secure/signup">Sign up</a>
+          <a href="secure/signup">{{'signUp' | translate}}</a>
         </li>
         <li id="login" ng-show="!username || username.length == 0">
           <!-- <a ng-href="#/login">Login</a> -->
-          <a href="secure/login">Login</a>
+          <a href="secure/login">{{'login' | translate}}</a>
         </li>
 
       </ul>
@@ -41,9 +41,9 @@
       <div class="row">
         <div ng-show="username.length > 0">
           <!-- <a class="pull-right" id="logout" ng-click="logout()">Logout</a> -->
-          <a class="pull-right" id="logout" href="/logout">Logout</a>
+          <a class="pull-right" id="logout" href="/logout">{{'logout' | translate}}</a>
           <span class="pull-right">&nbsp;|&nbsp;</span>
-          <div class="pull-right"><a href="/secure/account">Account</a></div>
+          <div class="pull-right"><a href="/secure/account">{{'account' | translate}}</a></div>
           <div class="pull-right">{{ username }}</div>
         </div>
       </div>

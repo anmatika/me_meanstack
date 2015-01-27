@@ -5,7 +5,11 @@
   "nav": {
     "home": "Koti"
   },
-  "continue": "Jatka",
+  "button": {
+  	"login": "Kirjaudu",
+  	"checkout": "Kassalle",
+  	"continue": "Jatka"
+  },
   "customer details": "Asiakastiedot",
   "firstname": "Etunimi",
   "lastname": "Sukunimi",
@@ -14,5 +18,12 @@
   "city": "Kaupunki",
   "country": "Maa",
   "shipping method": "Lähetystapa",
-  "back": "Takaisin"
+  "back": "Takaisin",
+  "login": "Kirjautuminen",
+  "signup": "Rekisteröityminen",
+  "username": "Käyttäjätunnus",
+  "email": "Sähköposti",
+  "password": "Salasana",
+  "order summary": "Yhteenveto",
+  "save": "Tallennus"
 }
